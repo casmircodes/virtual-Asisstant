@@ -147,13 +147,15 @@
 	let transcriptContainer = document.getElementById("transcript-container")
 	let start = document.getElementById("start")
 	let imageGif = document.getElementById("image-gif")
-	let systemPrompt = "You are a sarcastic and funny AI called Jarvis. You always answer in a funny and sarcastic way. You are always consistent with your sarcasm during conversations. Your maximum reply should be 50 words"
-        
+	
         speakBtn.disabled = true
          
         let apiKey = "AIzaSyCODX26wsePmZg9RHQbdQNuk032vGqLrDQ";
 	let url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
-
+	let chatHistory = ""
+	let systemPrompt = "You are a sarcastic and funny AI virtual asisstant called Jarvis. You always answer in a funny and sarcastic way. You are always consistent with your sarcasm during conversations. Your maximum reply should be 50 words"
+	let requestPrompt = `You are a Chatbot. Respond to the user based on the following system prompt: ${systemPrompt}, and the following chat history:${ chatHistory } `
+	
 
 	async function fetchResponseOfLLM(urlString, textPrompt){
   /*
@@ -182,7 +184,7 @@ if(!response.ok){
 }
    
   let data = await response.json()
-  
+  chatHistory = `${chatHistory} Virtual Asissatant: ${data.candidates[0].content.parts[0].text}`
   speak(data.candidates[0].content.parts[0].text)
   
   
@@ -277,16 +279,18 @@ console.log(response)
 		let hour = date.getHours()
 		console.log(hour)
 		if (hour > 0 && hour < 12)  {
+			chatHistory = `${chatHistory} Virtual Asissatant: Good morning sir, my name is Jarvis, how can i help you?`
 			speak("Good morning sir, my name is Jarvis, how can i help you?")
 			//getSpeech("Good morning sir, my name is Jarvis, how can i help you?")
 		}
 
 		if (hour >= 12 && hour < 16)  {
+			chatHistory = `${chatHistory} Virtual Asissatant: Good afternoon sir, my name is Jarvis, how can i help you?`
 			speak("Good after-noon sir, my name is Jarvis, how can i help you?")
 			//getSpeech("Good afternoon sir, my name is Jarvis, how can i help you?")
 		}
 		else{
-
+			chatHistory = `${chatHistory} Virtual Asissatant: Good evening sir, my name is Jarvis, how can i help you?`
 			speak("Good evening sir, my name is Jarvis, how can i help you?")
 			//getSpeech("Good evening sir, my name is Jarvis, how can i help you?")
 
@@ -348,19 +352,26 @@ console.log(response)
     function takeCommand(message) {
     	
     	if(message.includes("open facebook")){
+		chatHistory = `${chatHistory} User: ${message}`
 		getSpeech("Opening Facebook...")
+		chatHistory = `${chatHistory} Virtual Asisstant: (opened facebook)`
     		window.open("https://facebook.com","_blank")
     	}
     	else if(message.includes("open youtube")){
+		chatHistory = `${chatHistory} User: ${message}`
 		getSpeech("Opening Youtube...")
+		chatHistory = `${chatHistory} Virtual Asisstant: (opened Youtube)`
     		window.open("https://youtube.com","_blank")
     	}
 
     	else if(message.includes("open calculator")){
+		chatHistory = `${chatHistory} User: ${message}`
 		getSpeech("Opening calculator...")
+		chatHistory = `${chatHistory} Virtual Asisstant: (opened Calculator)`
     		window.open("calculator:///","_blank")
     	}else{
-		fetchResponseOfLLM(url, "Your name is Jarvis. In not more than 100 words, respond to the following: "+message)
+		chatHistory = `${chatHistory} User: ${message}``
+		fetchResponseOfLLM(url, requestPrompt)
 	}
     }
 
