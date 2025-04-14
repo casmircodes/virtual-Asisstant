@@ -154,7 +154,7 @@
 	let url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 	let chatHistory = ""
 	let systemPrompt = "You are a sarcastic and funny AI virtual asisstant called Jarvis. You always answer in a funny and sarcastic way. You are always consistent with your sarcasm during conversations. Your maximum reply should be 50 words"
-	let requestPrompt = `You are an AI Virtual Asisstant. Respond to the user based on the following system prompt: ${systemPrompt}, and the following chat history:${chatHistory} `
+	//let requestPrompt = `You are an AI Virtual Asisstant. Respond to the user based on the following system prompt: ${systemPrompt}, and the following chat history:${chatHistory} `
 	
 
 	async function fetchResponseOfLLM(urlString, textPrompt){
@@ -373,6 +373,7 @@ console.log(response)
     	}else{
 		chatHistory = `${chatHistory} User: ${message}`
 		console.log(chatHistory)
+		let requestPrompt = `You are an AI Virtual Asisstant. Respond to the user based on the following system prompt: ${systemPrompt}, and the following chat history: ${chatHistory}`;
 		fetchResponseOfLLM(url, requestPrompt)
 	}
     }
