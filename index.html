@@ -147,7 +147,70 @@
 	let transcriptContainer = document.getElementById("transcript-container")
 	let start = document.getElementById("start")
 	let imageGif = document.getElementById("image-gif")
-	speakBtn.disabled = true
+	let systemPrompt = "You are a sarcastic and funny AI called Jarvis. You always answer in a funny and sarcastic way. You are always consistent with your sarcasm during conversations. Your maximum reply should be 50 words"
+        
+        speakBtn.disabled = true
+         
+        let apiKey = "AIzaSyCODX26wsePmZg9RHQbdQNuk032vGqLrDQ"; // Replace with your actual API key
+	let url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+
+	async function fetchResponseOfLLM(urlString, textPrompt){
+  /*
+  userMessageInput.value = "gee"
+    console.log(userPrompt)
+  */
+  
+  try{
+    
+ let response = await fetch(urlString, {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify( {
+  contents: [
+    {
+      parts: [ {text: textPrompt}]
+    }
+  ]
+})
+})
+
+if(!response.ok){
+  throw Error("Error: something went wrong...")
+}
+   
+  let data = await response.json()
+  
+  getSpeech(data.candidates[0].content.parts[0].text)
+  
+  
+  
+  // console.log(data.candidates[0].content.parts[0].text)
+  
+  
+  
+  }catch(error){
+    displayResponse("Error: Failed to send request...")
+  console.log("Error:", error)
+  }
+    
+  
+        
+        
+   
+}   
+
+
+
+
+
+
+
+	
+	
+	
 
 	async function getSpeech(text){
 
@@ -299,7 +362,9 @@ console.log(response)
     	else if(message.includes("open calculator")){
 		getSpeech("Opening calculator...")
     		window.open("calculator:///","_blank")
-    	}
+    	}else{
+		fetchResponseOfLLM(url, systemPrompt)
+	}
     }
 
 
