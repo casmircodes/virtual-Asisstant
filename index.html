@@ -370,7 +370,7 @@ console.log(response)
 		chatHistory = `${chatHistory} Virtual Asisstant: (opened Calculator)`
     		window.open("calculator:///","_blank")
     	}else{
-		chatHistory = `${chatHistory} User: ${message}``
+		chatHistory = `${chatHistory} User: ${message}`
 		fetchResponseOfLLM(url, requestPrompt)
 	}
     }
