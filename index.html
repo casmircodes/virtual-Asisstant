@@ -224,10 +224,7 @@ let response = await fetch("https://api.elevenlabs.io/v1/text-to-speech/JBFqnCBs
 	body: JSON.stringify({
   "text": text,
   "model_id": "eleven_multilingual_v2",
-  "voice_id": "Yko7PKHZNXotIFUBG7I9",
-  "voice_settings": {
-    "style": 1
-  }
+  "voice_id": "Yko7PKHZNXotIFUBG7I9"
 })
 
 })
@@ -288,7 +285,7 @@ console.log(response)
 			//speak("Good after-noon sir, my name is Jarvis, how can i help you?")
 			getSpeech("Good afternoon sir, my name is Jarvis, how can i help you?")
 		}
-		if (hour >= 16 && hour < 25){
+		else{
 
 			//speak("Good evening sir, my name is Jarvis, how can i help you?")
 			getSpeech("Good evening sir, my name is Jarvis, how can i help you?")
