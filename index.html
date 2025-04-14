@@ -183,7 +183,7 @@ if(!response.ok){
    
   let data = await response.json()
   
-  getSpeech(data.candidates[0].content.parts[0].text)
+  speak(data.candidates[0].content.parts[0].text)
   
   
   
@@ -210,7 +210,7 @@ if(!response.ok){
 
 	
 	
-	
+/*	
 
 	async function getSpeech(text){
 
@@ -254,10 +254,10 @@ console.log(response)
 	console.log(error)
 }
 }
+*/
 
 
 
-/*
 
 	let speak = function (text){
 		let speech = new SpeechSynthesisUtterance(text)
@@ -269,7 +269,7 @@ console.log(response)
 		window.speechSynthesis.speak(speech)
 	}
 
-*/
+
 
 
 	let welcomeGreeting = function (){
@@ -277,18 +277,18 @@ console.log(response)
 		let hour = date.getHours()
 		console.log(hour)
 		if (hour > 0 && hour < 12)  {
-			//speak("Good morning sir, my name is Jarvis, how can i help you?")
-			getSpeech("Good morning sir, my name is Jarvis, how can i help you?")
+			speak("Good morning sir, my name is Jarvis, how can i help you?")
+			//getSpeech("Good morning sir, my name is Jarvis, how can i help you?")
 		}
 
 		if (hour >= 12 && hour < 16)  {
-			//speak("Good after-noon sir, my name is Jarvis, how can i help you?")
-			getSpeech("Good afternoon sir, my name is Jarvis, how can i help you?")
+			speak("Good after-noon sir, my name is Jarvis, how can i help you?")
+			//getSpeech("Good afternoon sir, my name is Jarvis, how can i help you?")
 		}
 		else{
 
-			//speak("Good evening sir, my name is Jarvis, how can i help you?")
-			getSpeech("Good evening sir, my name is Jarvis, how can i help you?")
+			speak("Good evening sir, my name is Jarvis, how can i help you?")
+			//getSpeech("Good evening sir, my name is Jarvis, how can i help you?")
 
 		}
 	}
@@ -297,7 +297,7 @@ console.log(response)
 
 
 	start.addEventListener("click", ()=>{
-		//speak("Initializing Jarvis...")
+		speak("Initializing Jarvis...")
 		//getSpeech("Initializing Jarvis.")
 		welcomeGreeting()
 		imageGif.src = "imagegif2.gif"
