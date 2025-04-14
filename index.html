@@ -288,17 +288,17 @@ console.log(response)
     function takeCommand(message) {
     	
     	if(message.includes("open facebook")){
-    		window.open("https://facebook.com","_blank")
 		getSpeech("Opening Facebook...")
+    		window.open("https://facebook.com","_blank")
     	}
     	else if(message.includes("open youtube")){
+		getSpeech("Opening Youtube...")
     		window.open("https://youtube.com","_blank")
-    		getSpeech("Opening Youtube...")
     	}
 
     	else if(message.includes("open calculator")){
+		getSpeech("Opening calculator...")
     		window.open("calculator:///","_blank")
-    		getSpeech("Opening calculator...")
     	}
     }
 
