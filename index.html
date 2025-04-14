@@ -291,6 +291,7 @@ console.log(response)
 		}
 		else{
 			chatHistory = `${chatHistory} Virtual Asissatant: Good evening sir, my name is Jarvis, how can i help you?`
+			console.log(chatHistory)
 			speak("Good evening sir, my name is Jarvis, how can i help you?")
 			//getSpeech("Good evening sir, my name is Jarvis, how can i help you?")
 
@@ -370,7 +371,8 @@ console.log(response)
 		chatHistory = `${chatHistory} Virtual Asisstant: (opened Calculator)`
     		window.open("calculator:///","_blank")
     	}else{
-		chatHistory = chatHistory+` User: ${message}`
+		chatHistory = `${chatHistory} User: ${message}`
+		console.log(chatHistory)
 		fetchResponseOfLLM(url, requestPrompt)
 	}
     }
