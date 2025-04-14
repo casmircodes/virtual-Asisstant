@@ -157,12 +157,12 @@
 	let requestPrompt = `You are a Chatbot. Respond to the user based on the following system prompt: ${systemPrompt}, and the following chat history:${ chatHistory } `
 	
 
-	async function fetchResponseOfLLM(urlString, textPrompt){
+	async function fetchResponseOfLLM(urlString, textPrompt, message){
   /*
   userMessageInput.value = "gee"
     console.log(userPrompt)
   */
-  
+  chatHistory = `${chatHistory} User: ${message}`
   try{
     
  let response = await fetch(urlString, {
@@ -370,8 +370,8 @@ console.log(response)
 		chatHistory = `${chatHistory} Virtual Asisstant: (opened Calculator)`
     		window.open("calculator:///","_blank")
     	}else{
-		chatHistory = `${chatHistory} User: ${message}`
-		fetchResponseOfLLM(url, requestPrompt)
+		
+		fetchResponseOfLLM(url, requestPrompt, message)
 	}
     }
 
