@@ -284,11 +284,11 @@ console.log(response)
 			getSpeech("Good morning sir, my name is Jarvis, how can i help you?")
 		}
 
-		else if (hour >= 12 && hour < 16)  {
+		if (hour >= 12 && hour < 16)  {
 			//speak("Good after-noon sir, my name is Jarvis, how can i help you?")
 			getSpeech("Good afternoon sir, my name is Jarvis, how can i help you?")
 		}
-		else{
+		if (hour >= 16 && hour < 25){
 
 			//speak("Good evening sir, my name is Jarvis, how can i help you?")
 			getSpeech("Good evening sir, my name is Jarvis, how can i help you?")
