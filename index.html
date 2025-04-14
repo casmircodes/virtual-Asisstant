@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Asisstant</title>
+    <style>
+    	*{
+    		padding: 0;
+    		margin: 0;
+    		box-sizing: border-box;
+    	}
+
+
+    	body{
+    		font-family: sans-serif;
+    		background-color: black;
+    		display: flex;
+    		justify-content: center;
+    		align-items: center;
+    		
+    	}
+
+
+    	#top-container{
+    		display: flex;
+    		flex-direction: column;
+    		justify-content: space-between;
+    		align-items: center;
+    		gap: 20px;
+    	}
+
+
+
+    	#image-gif{
+    		width: 400px;
+    		height: 400px;
+    	}
+
+    	#virtual-asisstant-name{
+    		color: teal;
+    		letter-spacing: 17px;
+    		font-size: 60px;
+    	}
+
+    	#javis-intro-text{
+    		color: gray;
+    	}
+
+    	#speak-btn{
+    		width: 90%;
+    		background-color: gray;
+    		border-radius: 20px;
+    		border: 2px solid gray;
+    		padding: 5px 0;
+    		display: flex;
+    		flex-direction: row;
+    		justify-content: center;
+    		align-items: center;
+    		gap: 8px; 
+
+    	}
+
+    	#speak-listen-text{
+    		color: white;
+    		font-size: 15px;
+    	}
+
+    	#transcript-container{
+    		display: flex;
+    		flex-direction: column;
+    		justify-content: center;
+    		align-items: center;
+    	}
+
+    	#transcript-container{
+    		color: gray;
+    	}
+    	
+
+    	@media(max-width: 768px){
+
+    		#speak-btn{
+    		width: 60%;
+    		
+
+    	}
+    	}
+
+    </style>
+</head>
+<body>
+
+<div id="top-container">
+	<img id="image-gif" src="imagegif2.jpg">
+	<h1 id="virtual-asisstant-name">JAVIS</h1>
+	<!--<h1 id="virtual-asisstant-name">MAVIS</h1>-->
+	<p id="javis-intro-text">
+		Hello, I am JARVIS, your Virtual Asisstant, how can i help you?
+	</p>
+
+	<button id="speak-btn">
+		<svg id="mic-icon" width="25px" height="30px" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+  <title>mic-solid</title>
+  <g id="Layer_2" data-name="Layer 2">
+    <g id="invisible_box" data-name="invisible box">
+      <rect width="48" height="48" fill="none"/>
+    </g>
+    <g id="Q3_icons" data-name="Q3 icons" fill="white">
+      <g>
+        <path d="M24,30a8,8,0,0,0,8-8V10a8,8,0,0,0-16,0V22A8,8,0,0,0,24,30Z"/>
+        <path d="M38,18a2,2,0,0,0-2,2v2a12,12,0,0,1-24,0V20a2,2,0,0,0-4,0v2A16.1,16.1,0,0,0,22,37.9V42H14a2,2,0,0,0,0,4H33a2,2,0,0,0,0-4H26V37.9A16.1,16.1,0,0,0,40,22V20A2,2,0,0,0,38,18Z"/>
+      </g>
+    </g>
+  </g>
+</svg>
+		
+<p id="speak-listen-text">Speak</p>
+	</button>
+
+	<button id="start">Start Javis</button>
+</div>
+
+<div id="transcript-container">
+	
+	<!--<p id="transcript">
+		lorem ipsum site amete sukante firebi no ra tatinos fita biari
+	</p>-->
+</div>
+
+
+
+<script>
+
+	let speakBtn = document.getElementById("speak-btn")
+	let speakListenText = document.getElementById("speak-listen-text")
+	let transcriptContainer = document.getElementById("transcript-container")
+	let start = document.getElementById("start")
+	let imageGif = document.getElementById("image-gif")
+	speakBtn.disabled = true
+
+	async function getSpeech(text){
+
+	try{
+let response = await fetch("https://api.elevenlabs.io/v1/text-to-speech/JBFqnCBsd6RMkjVDRZzb?output_format=mp3_44100_128", {
+	method: "POST",
+	headers: {
+		"xi-api-key": "sk_92aa9f45cf130f626aa2c05de577cf970f8888181e71d3c7",
+		"Content-Type": "application/json",
+	},
+	body: JSON.stringify({
+  "text": text,
+  "model_id": "eleven_multilingual_v2",
+  "voice_id": "Yko7PKHZNXotIFUBG7I9",
+  "voice_settings": {
+    "style": 1
+  }
+})
+
+})
+
+
+
+
+
+
+//let data = await response.json()
+
+const data = await response.arrayBuffer(); // Eleven labs returns audio as arrayBuffer.
+
+        // Create a blob from the ArrayBuffer
+        const blob = new Blob([data], { type: 'audio/mpeg' });
+
+        // Create a URL for the blob
+        const audioUrl = URL.createObjectURL(blob);
+
+        // Create an audio element and play the audio
+        const audio = new Audio(audioUrl);
+        audio.play();
+
+console.log(response)
+
+}catch(error){
+	console.log(error)
+}
+}
+
+
+
+/*
+
+	let speak = function (text){
+		let speech = new SpeechSynthesisUtterance(text)
+		speech.pitch = 1
+		speech.volume = 1
+		speech.rate = 1
+
+
+		window.speechSynthesis.speak(speech)
+	}
+
+*/
+
+
+	let welcomeGreeting = function (){
+		let date = new Date()
+		let hour = date.getHours()
+		console.log(hour)
+		if (hour > 0 && hour < 12)  {
+			//speak("Good morning sir, my name is Jarvis, how can i help you?")
+			getSpeech("Good morning sir, my name is Jarvis, how can i help you?")
+		}
+
+		else if (hour >= 12 && hour < 16)  {
+			//speak("Good after-noon sir, my name is Jarvis, how can i help you?")
+			getSpeech("Good afternoon sir, my name is Jarvis, how can i help you?")
+		}
+		else{
+
+			//speak("Good evening sir, my name is Jarvis, how can i help you?")
+			getSpeech("Good evening sir, my name is Jarvis, how can i help you?")
+
+		}
+	}
+
+
+
+
+	start.addEventListener("click", ()=>{
+		//speak("Initializing Jarvis...")
+		welcomeGreeting()
+		imageGif.src = "imagegif2.gif"
+		speakBtn.disabled = false
+	})
+
+
+
+
+	let SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
+	if (SpeechRecognition) {
+	let recognition = new SpeechRecognition()
+
+
+	recognition.onresult = (event)=>{
+		let transcript = event.results[event.resultIndex][0].transcript
+		
+
+		console.log(transcript)
+		transcriptContainer.textContent = transcript; // Display transcript
+		takeCommand(transcript.toLowerCase())
+        speakListenText.textContent = "Speak"; 
+
+	}
+
+
+	recognition.onerror = (event) => {
+        console.error("Speech recognition error:", event);
+        speakListenText.textContent = "Speak"; //reset the button text.
+        };
+	
+
+/*
+           //OR
+	recognition.addEventListener("error", (event)=>{
+		console.error("Speech recognition error:", event);
+        speakListenText.textContent = "Speak"; //reset the button text.
+	})
+    */
+
+
+    recognition.onend = () => {
+        console.log("Speech recognition ended.");
+        speakListenText.textContent = "Speak"; //reset the button text.
+    };
+
+
+    function takeCommand(message) {
+    	
+    	if(message.includes("open facebook")){
+    		window.open("https://facebook.com","_blank")
+    	}
+    	else if(message.includes("open youtube")){
+    		window.open("https://youtube.com","_blank")
+    		getSpeech("Opening Youtube...")
+    	}
+
+    	else if(message.includes("open ")){
+    		window.open("https://facebook.com","_blank")
+    		getSpeech("Opening Facebook...")
+    	}
+
+    	else if(message.includes("open calculator")){
+    		window.open("Calculator:///","_blank")
+    		getSpeech("Opening calculator...")
+    	}
+    }
+
+
+
+	speakBtn.addEventListener("click", ()=>{
+		recognition.start()
+		speakListenText.textContent = "Listening..."
+		
+	})
+
+	} else {
+    alert("Speech recognition is not supported in this browser.");
+}
+	
+
+</script>
+</body>
+</html>
