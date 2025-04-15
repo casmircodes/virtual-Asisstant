@@ -62,9 +62,28 @@
 
     	}
 
+
+
     	#speak-listen-text{
     		color: white;
     		font-size: 15px;
+    	}
+
+
+    	#start{
+    		width: 90%;
+    		background-color: gray;
+    		border-radius: 20px;
+    		border: 2px solid gray;
+    		padding: 10px 0;
+    		display: flex;
+    		flex-direction: row;
+    		justify-content: center;
+    		align-items: center;
+    		gap: 8px; 
+    		color: white;
+    		font-size: 15px;
+
     	}
 
     	#transcript-container{
@@ -86,9 +105,14 @@
     		
     	}
 
+    	#start{
+    		width: 60%;
+    		
+    	}
+
 		#javis-intro-text{
     		margin: 12px;
-		font-size: 9px;
+		font-size: 12px;
     	}
 
 		#image-gif{
@@ -301,7 +325,7 @@ console.log(response)
   </g>
 </svg>
 		
-<p id="speak-listen-text">Speak</p>`
+<p id="speak-listen-text">Click to Speak</p>`
 topContainer.appendChild(button)
 speakListenText = document.getElementById("speak-listen-text")
 
