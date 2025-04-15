@@ -379,22 +379,41 @@ speakListenText = document.getElementById("speak-listen-text")
     	
     	if(message.includes("open facebook")){
 		chatHistory = `${chatHistory} User: ${message}`
-		getSpeech("Opening Facebook...")
+		//getSpeech("Opening Facebook...")
+		speak("Opening Facebook...")
 		chatHistory = `${chatHistory} Virtual Asisstant: (opened facebook)`
     		window.open("https://facebook.com","_blank")
     	}
     	else if(message.includes("open youtube")){
 		chatHistory = `${chatHistory} User: ${message}`
-		getSpeech("Opening Youtube...")
+		//getSpeech("Opening Youtube...")
+		speak("Opening Youtube...")
 		chatHistory = `${chatHistory} Virtual Asisstant: (opened Youtube)`
     		window.open("https://youtube.com","_blank")
+    	}
+	else if(message.includes("open instagram")){
+		chatHistory = `${chatHistory} User: ${message}`
+		//getSpeech("Opening Intagram...")
+		speak("Opening Instagram...")
+		chatHistory = `${chatHistory} Virtual Asisstant: (opened Intagram)`
+    		window.open("https://instagram.com","_blank")
+    	}
+	else if(message.includes("date")){
+		chatHistory = `${chatHistory} User: ${message}`
+		let date = new Date().toLocaleDateString()
+		
+		//getSpeech("Opening Intagram...")
+		speak("Todays date is "+date)
+		chatHistory = `${chatHistory} Virtual Asisstant: Todays date is ${date}`
+    		
     	}
 
     	else if(message.includes("open calculator")){
 		chatHistory = `${chatHistory} User: ${message}`
-		getSpeech("Opening calculator...")
+		//getSpeech("Opening calculator...")
+		speak("Opening calculator...")
 		chatHistory = `${chatHistory} Virtual Asisstant: (opened Calculator)`
-    		window.open("Calculator:///","_blank")
+    		window.open("Calculator:////","_blank")
     	}else{
 		chatHistory = `${chatHistory} User: ${message}`
 		console.log(chatHistory)
