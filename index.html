@@ -402,9 +402,17 @@ speakListenText = document.getElementById("speak-listen-text")
 		chatHistory = `${chatHistory} User: ${message}`
 		let date = new Date().toLocaleDateString()
 		
-		//getSpeech("Opening Intagram...")
 		speak("Todays date is "+date)
 		chatHistory = `${chatHistory} Virtual Asisstant: Todays date is ${date}`
+    		
+    	}
+	else if(message.includes("time")){
+		chatHistory = `${chatHistory} User: ${message}`
+		let date = new Date()
+		let time = date.toLocaleTimeString()
+		
+		speak("The time is "+time)
+		chatHistory = `${chatHistory} Virtual Asisstant: The time is  ${time}`
     		
     	}
 
