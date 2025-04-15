@@ -426,7 +426,7 @@ speakListenText = document.getElementById("speak-listen-text")
     	}else{
 		chatHistory = `${chatHistory} User: ${message}`
 		console.log(chatHistory)
-		let requestPrompt = `You are an AI Virtual Asisstant. Respond to the user based on the following system prompt: ${systemPrompt}, and the following chat history: ${chatHistory}`;
+		let requestPrompt = `You are an AI Virtual Asisstant. Respond to the user based on the following system prompt: ${systemPrompt}, and the following chat history: ${chatHistory}. Do not return any asteriks(*) in your response`;
 		fetchResponseOfLLM(url, requestPrompt)
 	}
     }
