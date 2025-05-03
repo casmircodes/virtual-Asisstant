@@ -410,7 +410,7 @@ speakListenText = document.getElementById("speak-listen-text")
 	else if(message.includes("time")){
 		chatHistory = `${chatHistory} User: ${message}`
 		let date = new Date()
-		let time = date.toLocaleTimeString()
+		let time = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
 		
 		speak("The time is "+time)
 		chatHistory = `${chatHistory} Virtual Asisstant: The time is  ${time}`
